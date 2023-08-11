@@ -1,10 +1,9 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { ImageGalleryItem } from './ImageGalleryItem';
 import { ImageListUl } from './styled';
 
 export const ImageGallery = ({ images, toggleModal }) => {
-  console.log(images, '<');
   return (
     <ImageListUl>
       {images.map(photo => (
@@ -18,13 +17,13 @@ export const ImageGallery = ({ images, toggleModal }) => {
   );
 };
 
-// ImageGallery.propTypes = {
-//   images: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       id: PropTypes.number.isRequired,
-//       largeImageURL: PropTypes.string.isRequired,
-//       webformatURL: PropTypes.string.isRequired,
-//     })
-//   ).isRequired,
-//   toggleModal: PropTypes.func.isRequired,
-// };
+ImageGallery.propTypes = {
+  images: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      largeImageURL: PropTypes.string.isRequired,
+      webformatURL: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  toggleModal: PropTypes.func.isRequired,
+};
