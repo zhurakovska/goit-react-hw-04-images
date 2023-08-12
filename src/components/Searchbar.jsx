@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { StyledForm, StyledInput, StyledButtonSearch } from './styled';
@@ -9,11 +9,6 @@ export const Searchbar = ({
   inputValue,
   setInputValue,
 }) => {
-  // static propTypes = {
-  //   onSearchInput: PropTypes.func.isRequired,
-  //   handleSubmit: PropTypes.func.isRequired,
-  // };
-
   const onSubmit = e => {
     e.preventDefault();
 
@@ -34,7 +29,7 @@ export const Searchbar = ({
           autoFocus
           name="query"
           placeholder="Search images and photos"
-          onChange={handleInputCheange} // хендлим введеное
+          onChange={handleInputCheange}
         />
         <StyledButtonSearch
           onClick={handleSubmit}
@@ -47,4 +42,9 @@ export const Searchbar = ({
       </StyledForm>
     </header>
   );
+};
+
+Searchbar.propTypes = {
+  onSearchInput: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
 };

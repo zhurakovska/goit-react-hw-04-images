@@ -28,14 +28,13 @@ export const App = () => {
 
   const fetchData = async () => {
     try {
-      setLoader(true); // Устанавливаем состояние "загрузка" и сбрасываем ошибку
+      setLoader(true); 
 
       const { hits, totalHits } = await fetchImages({
-        // тут мы получаем запрос
-        per_page, // тут мы перезаписываем этот запрос
+        per_page,
         page,
         q: query,
-      }); // Выполняем запрос на сервер и получаем результат
+      }); 
 
       setImages(prevState => {
         console.log([...prevState, ...hits], 'hits');
@@ -52,7 +51,7 @@ export const App = () => {
       setLoader(false);
     }
   };
-  // Функция для загрузки изображений
+ 
   useEffect(() => {
     if (initialState.query !== query || initialState.page !== page) {
       fetchData();
@@ -64,14 +63,14 @@ export const App = () => {
       return;
     }
     setImages([]);
-    setParams(initialState); // обнуляем стейт чтобы при новом запросе не мешать данные с предыдущими
+    setParams(initialState); 
   };
 
   const handleLoadMore = () => {
     setParams(prev => ({
       ...prev,
       page: prev.page + 1,
-    })); // Увеличиваем текущую страницу на 1
+    }));
   };
 
   const handleSearchInput = currentQuery => {
@@ -112,7 +111,6 @@ export const App = () => {
           />
         </Modal>
       )}
-      {/* если модалка открытра то мы показываем наше окно */}
     </Container>
   );
 };
