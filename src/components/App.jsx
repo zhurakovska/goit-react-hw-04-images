@@ -57,12 +57,6 @@ export const App = () => {
     }
   }, [query, page, per_page, inputValue]);
 
-  // useEffect(() => {
-  //   if (initialState.query !== query || initialState.page !== page) {
-  //     fetchData();
-  //   }
-  // }, [query, page, initialState.query, initialState.page, fetchData]);
-
   const handleSubmit = async () => {
     if (query === inputValue) {
       return;
