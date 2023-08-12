@@ -1,20 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ModalWrapper, StyledModalWindow } from './styled';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 
 export const Modal = ({ children, toggleModal }) => {
-  const handleKeyDown = e => {
-    if (e.key === 'Escape') {
-      toggleModal();
-    }
-  };
+  const handleKeyDown = useCallback(
+    e => {
+      if (e.key === 'Escape') {
+        toggleModal();
+      }
+    },
+    [toggleModal]
+  );
 
   useEffect(() => {
-    document.addEventListener('keydown', handleKeyDown);
+    const onKeyDown = e => handleKeyDown(e);
+    document.addEventListener('keydown', onKeyDown);
 
-    return () => document.removeEventListener('keydown', handleKeyDown);
-  }, []);
+    return () => {
+      document.removeEventListener('keydown', onKeyDown);
+    };
+  }, [handleKeyDown]);
 
   const onBackdropClick = e => {
     if (e.target === e.currentTarget) {
