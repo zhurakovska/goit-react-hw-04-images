@@ -55,7 +55,7 @@ export const App = () => {
     if (initialState.query !== query || initialState.page !== page) {
       fetchData();
     }
-  }, [query, page, initialState.query, initialState.page, per_page]);
+  }, [query, page]);
 
   // useEffect(() => {
   //   if (initialState.query !== query || initialState.page !== page) {
@@ -108,12 +108,7 @@ export const App = () => {
       {isShowloadMore && <Button onClick={handleLoadMore} />}
       {isModalOpen && (
         <Modal toggleModal={toggleModal}>
-          text
-          <img
-            src={currentImage}
-            alt="text"
-            // onClick={getModalImage}
-          />
+          <img src={currentImage} alt="text" />
         </Modal>
       )}
     </Container>

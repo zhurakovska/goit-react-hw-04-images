@@ -1,17 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ModalWrapper, StyledModalWindow } from './styled';
-import { useEffect, useCallback } from 'react';
+import { useEffect } from 'react';
 
 export const Modal = ({ children, toggleModal }) => {
-  const handleKeyDown = useCallback(
-    e => {
-      if (e.key === 'Escape') {
-        toggleModal();
-      }
-    },
-    [toggleModal]
-  );
+  const handleKeyDown = e => {
+    if (e.key === 'Escape') {
+      toggleModal();
+    }
+  };
 
   useEffect(() => {
     const onKeyDown = e => handleKeyDown(e);
@@ -20,7 +17,7 @@ export const Modal = ({ children, toggleModal }) => {
     return () => {
       document.removeEventListener('keydown', onKeyDown);
     };
-  }, [handleKeyDown]);
+  }, []);
 
   const onBackdropClick = e => {
     if (e.target === e.currentTarget) {
