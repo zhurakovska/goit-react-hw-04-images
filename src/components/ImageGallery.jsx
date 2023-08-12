@@ -4,7 +4,6 @@ import { ImageGalleryItem } from './ImageGalleryItem';
 import { ImageListUl } from './styled';
 
 export const ImageGallery = ({ images, toggleModal }) => {
-  console.log(images, '<');
   return (
     <ImageListUl>
       {images.map(photo => (
