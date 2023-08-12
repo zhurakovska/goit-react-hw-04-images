@@ -52,10 +52,10 @@ export const App = () => {
       }
     };
 
-    if (initialState.query !== query || initialState.page !== page) {
+    if (inputValue && query === inputValue) {
       fetchData();
     }
-  }, [query, page]);
+  }, [query, page, per_page, inputValue]);
 
   // useEffect(() => {
   //   if (initialState.query !== query || initialState.page !== page) {

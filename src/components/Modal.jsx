@@ -17,7 +17,7 @@ export const Modal = ({ children, toggleModal }) => {
     return () => {
       document.removeEventListener('keydown', onKeyDown);
     };
-  }, []);
+  });
 
   const onBackdropClick = e => {
     if (e.target === e.currentTarget) {
