@@ -26,44 +26,49 @@ export const App = () => {
 
   const { per_page, page, query, currentImage } = params;
 
-  const fetchData = async () => {
-    try {
-      setLoader(true); 
-
-      const { hits, totalHits } = await fetchImages({
-        per_page,
-        page,
-        q: query,
-      }); 
-
-      setImages(prevState => {
-        console.log([...prevState, ...hits], 'hits');
-        return [...prevState, ...hits];
-      });
-
-      setShowloadMore(page * per_page < totalHits);
-    } catch (error) {
-      setParams(prevState => ({
-        ...prevState,
-        error: 'An error occurred while fetching images.',
-      }));
-    } finally {
-      setLoader(false);
-    }
-  };
- 
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoader(true);
+
+        const { hits, totalHits } = await fetchImages({
+          per_page,
+          page,
+          q: query,
+        });
+
+        setImages(prevState => {
+          return [...prevState, ...hits];
+        });
+
+        setShowloadMore(page * per_page < totalHits);
+      } catch (error) {
+        setParams(prevState => ({
+          ...prevState,
+          error: 'An error occurred while fetching images.',
+        }));
+      } finally {
+        setLoader(false);
+      }
+    };
+
     if (initialState.query !== query || initialState.page !== page) {
       fetchData();
     }
-  }, [query, page]);
+  }, [query, page, initialState.query, initialState.page, per_page]);
+
+  // useEffect(() => {
+  //   if (initialState.query !== query || initialState.page !== page) {
+  //     fetchData();
+  //   }
+  // }, [query, page, initialState.query, initialState.page, fetchData]);
 
   const handleSubmit = async () => {
     if (query === inputValue) {
       return;
     }
     setImages([]);
-    setParams(initialState); 
+    setParams(initialState);
   };
 
   const handleLoadMore = () => {
