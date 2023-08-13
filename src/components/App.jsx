@@ -22,7 +22,6 @@ export const App = () => {
   const [params, setParams] = useState(initialState);
   const [isShowloadMore, setShowloadMore] = useState(false);
   const [isModalOpen, setModalOpen] = useState(false);
-  const [inputValue, setInputValue] = useState('');
 
   const { per_page, page, query, currentImage } = params;
 
@@ -52,17 +51,16 @@ export const App = () => {
       }
     };
 
-    if (inputValue && query === inputValue) {
+    if (initialState.query !== query || initialState.page !== page) {
       fetchData();
     }
-  }, [query, page, per_page, inputValue]);
+  }, [query, page, per_page]);
 
-  const handleSubmit = async () => {
-    if (query === inputValue) {
-      return;
+  const handleSubmit = inputValue => {
+    if (inputValue !== query) {
+      setImages([]);
+      setParams(initialState);
     }
-    setImages([]);
-    setParams(initialState);
   };
 
   const handleLoadMore = () => {
@@ -92,10 +90,8 @@ export const App = () => {
   return (
     <Container>
       <Searchbar
-        onSearchInput={handleSearchInput}
+        handleSearchInput={handleSearchInput}
         handleSubmit={handleSubmit}
-        inputValue={inputValue}
-        setInputValue={setInputValue}
       />
       {<ImageGallery toggleModal={toggleModal} images={images} />}
       {loader && <Loader />}

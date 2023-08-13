@@ -1,18 +1,14 @@
-// import React, { useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { StyledForm, StyledInput, StyledButtonSearch } from './styled';
 
-export const Searchbar = ({
-  onSearchInput,
-  handleSubmit,
-  inputValue,
-  setInputValue,
-}) => {
+export const Searchbar = ({ handleSearchInput, handleSubmit }) => {
+  const [inputValue, setInputValue] = useState('');
   const onSubmit = e => {
     e.preventDefault();
 
-    onSearchInput(inputValue);
+    handleSearchInput(inputValue);
   };
 
   const handleInputCheange = ({ target }) => {
@@ -32,7 +28,7 @@ export const Searchbar = ({
           onChange={handleInputCheange}
         />
         <StyledButtonSearch
-          onClick={handleSubmit}
+          onClick={() => handleSubmit(inputValue)}
           type="submit"
           disabled={disabled}
           className={disabled && 'disabled'}
@@ -45,6 +41,6 @@ export const Searchbar = ({
 };
 
 Searchbar.propTypes = {
-  onSearchInput: PropTypes.func.isRequired,
+  handleSearchInput: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
 };
